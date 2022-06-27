@@ -86,22 +86,30 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Mac-Builds
-          path: ./dist/
+          path: |
+                ./dist/*.dmg
+                ./dist/*.dmg.*
+                ./dist/*.pkg
 
       - name: Upload artifacts for Windows
         if: startsWith(matrix.os, 'windows')
         uses: actions/upload-artifact@v3
         with:
           name: Windows-Builds
-          path: ./dist/
+          path: |
+                ./dist/*.zip
+                ./dist/*.exe
+                ./dist/*.appx
+                
 
       - name: Upload artifacts for Linux
         if: startsWith(matrix.os, 'ubuntu')
         uses: actions/upload-artifact@v3
         with:
           name: Linux-Builds
-          path: ./dist/
-
+          path: |
+                ./dist/*.bz2
+                ./dist/*.AppImage
 
 # Temporary 30 day certificate, not needed for Microsoft Store
 #          windows_certs: ${{ secrets.windows_certs }}
