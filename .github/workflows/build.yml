@@ -90,6 +90,8 @@ jobs:
                 ./dist/*.dmg
                 ./dist/*.dmg.*
                 ./dist/*.pkg
+          # Retain only 3 versions of builds at a time.
+          retention-days: 21
 
       - name: Upload artifacts for Windows
         if: startsWith(matrix.os, 'windows')
@@ -100,6 +102,7 @@ jobs:
                 ./dist/*.zip
                 ./dist/*.exe
                 ./dist/*.appx
+          retention-days: 21
                 
 
       - name: Upload artifacts for Linux
@@ -110,6 +113,7 @@ jobs:
           path: |
                 ./dist/*.bz2
                 ./dist/*.AppImage
+          retention-days: 21
 
 # Temporary 30 day certificate, not needed for Microsoft Store
 #          windows_certs: ${{ secrets.windows_certs }}
