@@ -93,3 +93,24 @@ jobs:
         if: startsWith(matrix.os, 'macos') && env.is_tag == 'true'
         run: |
           node script/xcrun-wrapper.mjs dist/mas/LosslessCut-mac-x64.pkg ${{ secrets.api_key_id }} ${{ secrets.api_key_issuer_id }} 1505323402 no.mifi.losslesscut-mac
+      
+      - name: Upload artifacts for Mac
+        if: startsWith(matrix.os, 'macos')
+        - uses: actions/upload-artifact@v3
+        with:
+          name: Mac-Builds
+          path: ./dist/
+
+      - name: Upload artifacts for Windows
+        if: startsWith(matrix.os, 'windows')
+        - uses: actions/upload-artifact@v3
+        with:
+          name: Windows-Builds
+          path: ./dist/
+
+      - name: Upload artifacts for Linux
+        if: startsWith(matrix.os, 'ubuntu')
+        - uses: actions/upload-artifact@v3
+        with:
+          name: Linux-Builds
+          path: ./dist/
