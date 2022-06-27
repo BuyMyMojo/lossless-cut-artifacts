@@ -81,19 +81,6 @@ jobs:
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
 
-# Temporary 30 day certificate, not needed for Microsoft Store
-#          windows_certs: ${{ secrets.windows_certs }}
-#          windows_certs_password: ${{ secrets.windows_certs_password }}
-        env:
-          # macOS notarization API key
-          API_KEY_ID: ${{ secrets.api_key_id }}
-          API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
-
-      - name: Upload to Mac App Store
-        if: startsWith(matrix.os, 'macos') && env.is_tag == 'true'
-        run: |
-          node script/xcrun-wrapper.mjs dist/mas/LosslessCut-mac-x64.pkg ${{ secrets.api_key_id }} ${{ secrets.api_key_issuer_id }} 1505323402 no.mifi.losslesscut-mac
-      
       - name: Upload artifacts for Mac
         if: startsWith(matrix.os, 'macos')
         - uses: actions/upload-artifact@v3
@@ -114,3 +101,17 @@ jobs:
         with:
           name: Linux-Builds
           path: ./dist/
+
+
+# Temporary 30 day certificate, not needed for Microsoft Store
+#          windows_certs: ${{ secrets.windows_certs }}
+#          windows_certs_password: ${{ secrets.windows_certs_password }}
+        env:
+          # macOS notarization API key
+          API_KEY_ID: ${{ secrets.api_key_id }}
+          API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
+
+      - name: Upload to Mac App Store
+        if: startsWith(matrix.os, 'macos') && env.is_tag == 'true'
+        run: |
+          node script/xcrun-wrapper.mjs dist/mas/LosslessCut-mac-x64.pkg ${{ secrets.api_key_id }} ${{ secrets.api_key_issuer_id }} 1505323402 no.mifi.losslesscut-mac
