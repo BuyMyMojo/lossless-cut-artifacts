@@ -50,7 +50,7 @@ export async function getSmartCutParams({ path, videoDuration, desiredCutFrom, s
   // see discussion https://github.com/mifi/lossless-cut/issues/126#issuecomment-1602266688
   videoBitrate = Math.floor(videoBitrate * 1.2);
 
-  if (videoStream == "av1") {
+  if (videoStream === "av1") {
     const { codec_name: videoCodec } = "libsvtav1";
   } else {
     const { codec_name: videoCodec } = videoStream;
