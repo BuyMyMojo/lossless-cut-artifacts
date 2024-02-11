@@ -51,9 +51,11 @@ export async function getSmartCutParams({ path, videoDuration, desiredCutFrom, s
   videoBitrate = Math.floor(videoBitrate * 1.2);
 
   if (videoStream === 'av1') {
-    videoStream = 'libsvtav1';
+    let videoStream2 = 'libsvtav1';
+  } else {
+    let videoStream2 = videoStream
   }
-  const { codec_name: videoCodec } = videoStream;
+  const { codec_name: videoCodec } = videoStream2;
 
   if (videoCodec == null) throw new Error('Unable to determine codec for smart cut');
 
