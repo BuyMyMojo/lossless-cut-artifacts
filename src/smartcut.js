@@ -53,7 +53,7 @@ export async function getSmartCutParams({ path, videoDuration, desiredCutFrom, s
   if (videoStream === 'av1') {
     const videoStream2 = 'libsvtav1';
   } else {
-    const videoStream2 = videoStream
+    const videoStream2 = videoStream;
   }
   const { codec_name: videoCodec } = videoStream2;
 
